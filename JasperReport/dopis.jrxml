@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dopis" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fce20c65-8422-4039-8bff-3eb18fbe68a9">
+	<property name="ireport.zoom" value="0.46650738020973365"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/martin/UHK/PRO3_2013/JasperReport/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM Lidi]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jmeno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prijmeni" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rodneCislo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="datumNarozeni" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ulice" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="psc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mesto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="RTF_TEXT" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA["/home/martin/UHK/PRO3_2013/JasperReport/text.rtf"]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<detail>
+		<band height="802">
+			<textField>
+				<reportElement uuid="e7422d26-d94d-4062-a859-72d1722c19dc" x="407" y="66" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{psc} + " " + $F{mesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="88a7a1ff-96a1-4c54-8c37-6914d53a5006" x="407" y="46" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ulice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9581a1b2-b6be-4c34-b6ac-38633877f687" x="407" y="26" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jmeno} + " " + $F{prijmeni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d4cf839-df9c-4852-a2cd-b3fba9490729" x="0" y="782" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Strana "+$V{PAGE_NUMBER}+" z"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="e49cb55e-8b80-46bc-b60f-5dda45c2bb50" x="80" y="782" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="ea2ab4cc-5b3b-4fc1-bb9a-28b9ebb7279a" x="0" y="2" width="201" height="105"/>
+				<imageExpression><![CDATA["not.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="03d1f6b8-d418-41bd-a2af-920b1f607087" x="0" y="107" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dopis]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement uuid="30cafec8-175a-4382-bc68-adc3edd4ef4e" x="407" y="86" width="148" height="21"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{id}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<subreport>
+				<reportElement uuid="58c7f97e-78e5-4812-a375-351cabae8d8a" x="407" y="6" width="112" height="20"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["dopis_subreport_pohlavi.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="8abd9fe6-f2df-4967-9eca-6e2888b54d8b" x="0" y="134" width="555" height="648"/>
+				<textElement markup="rtf"/>
+				<textFieldExpression><![CDATA[(new java.util.Scanner(new java.io.FileInputStream(new java.io.File($V{RTF_TEXT})))).useDelimiter("\\\\A").next()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

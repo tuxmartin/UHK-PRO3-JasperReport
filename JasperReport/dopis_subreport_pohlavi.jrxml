@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dopis_subreport_pohlavi" language="groovy" pageWidth="250" pageHeight="250" columnWidth="250" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2eee5c97-6466-4399-8776-a73ad6722966">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id, SUBSTR( rodneCislo, 3, 1 ) AS pohlavi FROM Lidi WHERE id=$P{id} LIMIT 1]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pohlavi" class="java.lang.String"/>
+	<detail>
+		<band height="136" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c5a92273-85ad-4a68-ba33-dc3b29891445" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[($F{pohlavi}.equals("5") ? "Paní" : "Pan")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
